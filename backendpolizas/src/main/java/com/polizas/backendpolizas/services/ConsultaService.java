@@ -49,4 +49,7 @@ public class ConsultaService {
         return polizaDetRepository.findById(idpoliza).get();
     }
 
+    public void actualizarPoliza(DetallePoliza detallePoliza){
+        polizaDetRepository.save(detallePoliza);
+    }
 }

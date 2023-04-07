@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,17 +43,7 @@ public class PolizasController {
         return new ResponseEntity(polizas, HttpStatus.OK);
     }
 
-    @GetMapping("/obtenerempleado/{idempleado}")
-    public Empleado getEmpleado(@PathVariable Integer idempleado){
-        return consultaService.obtenerEmpleado(idempleado);
-    }
-    @GetMapping("/obtenerarticulo/{sku}")
-    public DetalleArticulo getArticulo(@PathVariable Integer sku){
-        return consultaService.obtenerDetalle(sku);
-    }
-
-
-    @GetMapping("obtenerpoliza/{idpoliza}")
+    @GetMapping( value = "obtenerpoliza/{idpoliza}")
     public Response getPoliza(@PathVariable Integer idpoliza){
         Response response = new Response();
         try{
@@ -75,13 +67,32 @@ public class PolizasController {
             Meta meta = new Meta();
             meta.setStatus("FAILURE");
             Data data = new Data();
-            data.setMensaje("Ha ocurrido un error al consultar la poliza.");
+            data.setMensaje("Ha ocurrido un error al consultar la póliza.");
             response.setMeta(meta);
             response.setData(data);
 
         }
 
         return response;
+    }
+
+    @PutMapping(value = "actualizar/{idpoliza}")
+    public Response putPoliza(@PathVariable Integer idpoliza, @RequestBody DetallePoliza detallePoliza){
+        Response response = new Response();
+        Meta meta = new Meta();
+        Data data = new Data();
+        DetallePoliza poliza = consultaService.obtenerDetPoliza(idpoliza);
+        poliza.setEmpleadogenero(detallePoliza.getEmpleadogenero());
+        poliza.setSku(detallePoliza.getSku());
+        poliza.setCantidad(detallePoliza.getCantidad());
+        consultaService.actualizarPoliza(poliza);
+        //Meta meta = new Meta();
+        meta.setStatus("OK");
+        data.setMensaje("Se actualizo correctamente la poliza " + detallePoliza.getIdpolizas());
+        response.setMeta(meta);
+        response.setData(data);
+        return response;
+        
     }
 
     

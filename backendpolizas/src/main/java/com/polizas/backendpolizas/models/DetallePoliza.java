@@ -4,12 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "polizas")
 @Getter
+@Setter
 @NoArgsConstructor
 public class DetallePoliza {
     @Id
@@ -17,5 +21,4 @@ public class DetallePoliza {
     int empleadogenero;
     int sku;
     int cantidad;
-    String fecha;
 }
