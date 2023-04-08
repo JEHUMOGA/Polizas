@@ -23,6 +23,7 @@ import com.polizas.backendpolizas.models.Empleado;
 import com.polizas.backendpolizas.models.Meta;
 import com.polizas.backendpolizas.models.Poliza;
 import com.polizas.backendpolizas.models.Response;
+import com.polizas.backendpolizas.models.ViewPolizas;
 //import com.polizas.backendpolizas.services.ConsultaService;
 import com.polizas.backendpolizas.services.PolizaService;
 
@@ -121,6 +122,24 @@ public class PolizasController {
             
         }catch(Exception e){
             response = generaFailure("Ha ocurrido un error en los grabados de póliza.");
+        }
+
+        return response;
+    }
+
+    @GetMapping(value = "listapolizas")
+    public Response listaPolizas(){
+        Response response = new Response();
+        Meta meta = new Meta();
+        Data data = new Data();
+        try{
+            List<ViewPolizas> lista = polizaService.listaPolizas();
+            meta.setStatus("OK");
+            data.setListapolizas(lista);
+            response.setMeta(meta);
+            response.setData(data);  
+        }catch (Exception e){
+            response = generaFailure("Ha ocurrido un error al obtener pólizas.");
         }
 
         return response;
