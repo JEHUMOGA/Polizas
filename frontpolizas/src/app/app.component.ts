@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { PolizasService } from './services/polizas/polizas.service'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +12,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontpolizas';
+  
 }

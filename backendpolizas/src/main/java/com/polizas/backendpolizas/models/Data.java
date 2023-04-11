@@ -1,5 +1,7 @@
 package com.polizas.backendpolizas.models;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Getter;
@@ -18,4 +20,11 @@ public class Data {
     DetalleArticulo detalleArticulo;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     String mensaje;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    List<ViewPolizas> listapolizas;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    List<DetalleArticulo> listaArticulos;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    List<Empleado> listaEmpleados;
 }

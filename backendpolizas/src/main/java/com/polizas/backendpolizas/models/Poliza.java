@@ -2,6 +2,7 @@ package com.polizas.backendpolizas.models;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -21,15 +22,15 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-//@JsonFilter("empleadogenero")
-@JsonIgnoreProperties(value = {"empleadogenero"})
 public class Poliza {
     @Id
-    int idpolizas;
+    @Column(name = "idpolizas")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    int idpoliza;
 //    @JsonIgnore
-    int empleadogenero;
-    @JsonIgnore
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-    int sku;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    Integer empleadogenero;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    Integer sku;
     int cantidad;
 }

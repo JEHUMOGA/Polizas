@@ -1,0 +1,68 @@
+<div class ="container">
+    <div >
+      <h1 class="text-center"> Polizas </h1>
+      <div class="mt-5 mx-5 d-flex justify-content-end">
+        <div class="input-group">
+            <input type="text" [(ngModel)]="search" (ngModelChange)="Search()" placeholder="Buscar" >
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarModal">Agregar</button> 
+            <div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="agregarModalLabel">Agregar Poliza</h1>
+                    </div>
+                    <div class="modal-body align-self-center">
+                        <form [formGroup]="formAgregar" >
+                            <div class="d-flex flex-column mb-3">
+                              <label>Selecciona empleado:</label>
+                              <select class="form-select" formControlName="empleado" >
+                                <option selected>SELECCINA EMPLEADO</option>
+                                <option [value]="item.idempleado" *ngFor="let item of listaempleados" >{{item.nombre}} {{item.apellido}}</option>
+                              </select>
+                            </div>
+                            <div class="d-flex flex-column mb-3">
+                              <label>Selecciona articulo:</label>
+                              <select class="form-select" formControlName="articulo" >
+                                <option [value]="item.sku" *ngFor="let item of listaarticulos" >{{item.nombre}}</option>
+                              </select>
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control" type="number" formControlName="cantidad" placeholder="Cantidad">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="formAgregar.reset()" data-bs-dismiss="modal">Cerrar</button>
+                    <button (click)="guardar()" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <table class="mt-5 mx-5 table">
+        <thead>
+            <tr>
+                <th *ngFor="let head of headers" scope="col">{{head}}</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let poliza of polizasFiltradas">
+                <th scope="col">{{poliza.idpolizas}}</th>
+                <td scope="col">{{poliza.sku}}</td>
+                <td scope="col">{{poliza.nombrearticulo}}</td>
+                <td scope="col">{{poliza.cantidad}}</td>
+                <td scope="col">
+                  <div>
+                    <button type="button" (click)="verDetalle(poliza.idpolizas, poliza.sku)" class="btn btn-primary btn-lg mx-2">Ver</button>
+                    <button type="button" (click)="confirmarEliminacion(poliza.idpolizas)" class="btn btn-danger btn-lg mx-2">Eliminar</button>
+                  </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
