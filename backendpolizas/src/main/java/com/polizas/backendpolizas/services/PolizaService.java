@@ -39,12 +39,18 @@ public class PolizaService {
         polizaRepository.save(detallePoliza);
     }
 
-    public Integer generaPoliza(Poliza poliza, Empleado empleado, DetalleArticulo articulo ){
-        return polizaRepository.generarPoliza(empleado.getNombreemp(), empleado.getApellidopatemp(), articulo.getNombre(), poliza.getCantidad());
+    public Integer generaPoliza(Poliza poliza){
+        Integer idEmp = poliza.getEmpleadogenero();
+        Integer idArt = poliza.getSku();
+        Integer cant = poliza.getCantidad();
+        return polizaRepository.generarPoliza(idEmp, idArt, cant);
     }
 
-    public Integer actualizarPoliza(Integer idpol, Poliza poliza, Empleado empleado, DetalleArticulo articulo ){
-        return polizaRepository.actualizarPoliza(idpol,empleado.getNombreemp(), empleado.getApellidopatemp(), articulo.getNombre(), poliza.getCantidad());
+    public Integer actualizarPoliza(Integer idpol, Poliza poliza){
+        Integer idEmp = poliza.getEmpleadogenero();
+        Integer idArt = poliza.getSku();
+        Integer cant = poliza.getCantidad();
+        return polizaRepository.actualizarPoliza(idpol,idEmp, idArt, cant);
     }
 
     public List<Empleado> listaEmpleados(){
@@ -56,6 +62,10 @@ public class PolizaService {
 
     public List<ViewPolizas> listaPolizas(){
         return viewPolizasRepository.findAll();
+    }
+
+    public Integer eliminarPoliza(int idpol){
+        return polizaRepository.eliminarPoliza(idpol);
     }
 
 }

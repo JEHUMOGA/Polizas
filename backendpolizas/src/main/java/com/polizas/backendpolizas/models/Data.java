@@ -23,4 +23,8 @@ public class Data {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     List<ViewPolizas> listapolizas;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    List<DetalleArticulo> listaArticulos;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    List<Empleado> listaEmpleados;
 }

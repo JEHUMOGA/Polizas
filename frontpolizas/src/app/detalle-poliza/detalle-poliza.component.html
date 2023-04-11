@@ -1,0 +1,77 @@
+<div class="container">
+    <div>
+        <div class="d-flex justify-content-center">
+            <h1 >Detalle de la Poliza</h1>
+        </div>
+        <div class="d-flex justify-content-center ">
+             <div class="d-flex flex-column w-75">
+                <div class="d-flex flex-row justify-content-between">
+                    <div class="m-3">
+                        <button class="btn btn-primary" [routerLink]="['../polizas']" (click)="limpiar()"> Regresar</button>
+                    </div>
+                    <div class="m-3">
+                        <button class="btn btn-warning" (click)="habilitar()" [disabled]="!band"> Editar</button>
+                    </div>
+                </div>
+                <div class="card py-4">
+                    <div class=" py-4">
+                        <div class="d-flex justify-content-center text-center m-2">
+                            <div class="d-flex flex-row align-self-center">
+                                <label class="fs-4 fw-bold mx-2"> ID Poliza: </label>
+                                <div>
+                                    <input class=" form-control fs-5" [(ngModel)]="idpoliza" [disabled]="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row justify-content-center text-center m-2" >
+                            <div>
+                                <label class="fs-4 fw-bold"> Empleado: </label>
+                            </div>
+                            <div>
+                                <select class="form-select form-select-lg mb-3" id="emp" [(ngModel)]="selectedEmpleadoName" (ngModelChange)="cambioEmpleado()" [disabled]="band">
+                                    <option [value]="item.idempleado" *ngFor="let item of listaempleados"> {{item.nombre}} {{item.apellido}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="text-center m-2 d-flex justify-content-center" >
+                            <div class="d-flex flex-column">
+                                <div>
+                                    <label class="fs-4 fw-bold"> Articulo: </label>
+                                </div>
+                                <div class="col d-flex flex-row m-3 fs-5">
+                                    <label class=" fw-bold mx-2" > SKU: </label>
+                                    <div >
+                                        <input class="form-control" [(ngModel)]="selectedArticulo" (ngModelChange)="cambioSku()" [disabled]="band">
+                                    </div>
+                                </div>
+                                <div class="col d-flex flex-row fs-5">
+                                    <label class="fw-bold m-2"> Nombre:</label>
+                                    <div>
+                                        <select class="form-select form-select-lg mb-3" [(ngModel)]="selectedArticuloName" (ngModelChange)="cambioName()" [disabled]="band">
+                                            <option *ngFor="let item of listaarticulos" [value]="item.sku">{{item.nombre}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center fs-5">
+                            <label class="fw-bold mx-2"> Cantidad: </label>
+                            <div>
+                                <input [(ngModel)]="cantidadModel" type="number" class="form-control" [disabled]="band">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex m-3 justify-content-end" >
+                    <div>
+                        <button class="btn btn-danger m-2" (click)="cancelar()" [hidden]="band">Cancelar</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-success m-2" (click)="guardar()" [hidden]="band">Guardar</button>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+
